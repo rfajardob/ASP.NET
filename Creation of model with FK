@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Spani.Models
+{
+    public class Worker
+    {
+        public int WorkerID { get; set; }
+        public string WorkerName { get; set; }
+
+        public string WorkerLastName { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public int Hours { get; set; }
+        public int ActivityRefId { get; set; }
+
+        [ForeignKey("ActivityRefId")]
+        public Activity Activity { get; set; }
+
+        public int JobSiteRefId { get; set; }
+
+        [ForeignKey("JobSiteRefId")]
+        public JobSite JobSite { get; set; }
+    }
+
+    public class Activity
+    {
+        public int ActivityId { get; set; }
+        public string ActivityName { get; set; }
+
+        public ICollection<Worker> Workers { get; set; }
+    }
+    public class JobSite
+    {
+        public int JobSiteId { get; set; }
+        public string JobSiteName { get; set; }
+
+        public ICollection<Worker> Workers { get; set; }
+    }
+
+
+
+
+}
